@@ -5,9 +5,11 @@
     "node": ">=18"
   },
   "scripts": {
-    "dev": "tsc-watch --noClear -p ./tsconfig.json --outDir ./dist --onSuccess \"node ./dist/server.js\""
+    "dev": "tsc-watch --noClear -p ./tsconfig.json --outDir ./dist --onSuccess \"node ./dist/db.js\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "pg-promise": "^11.5.4"
+  },
   "devDependencies": {
     "@tsconfig/node18": "^1.0.1",
     "@types/express": "^4.17.14",
