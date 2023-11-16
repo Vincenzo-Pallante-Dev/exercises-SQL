@@ -19,6 +19,11 @@ const setupDb = async () => {
         rating INTEGER NOT NULL,
         stock_count INTEGER NOT NULL
     )
+
+    
     `);
+
+  await db.none(`ALTER TABLE books ADD COLUMN publisher TEXT`);
+  await db.none(`ALTER TABLE books ADD COLUMN number_pages INTEGER NOT NULL`);
 };
 setupDb();

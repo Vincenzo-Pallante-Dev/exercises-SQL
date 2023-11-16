@@ -24,6 +24,10 @@ const setupDb = () => __awaiter(void 0, void 0, void 0, function* () {
         rating INTEGER NOT NULL,
         stock_count INTEGER NOT NULL
     )
+
+    
     `);
+    yield db.none(`ALTER TABLE books ADD COLUMN publisher TEXT`);
+    yield db.none(`ALTER TABLE books ADD COLUMN number_pages INTEGER NOT NULL`);
 });
 setupDb();
