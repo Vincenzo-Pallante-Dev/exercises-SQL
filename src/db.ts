@@ -26,6 +26,16 @@ const setupDb = async () => {
   await db.none(`ALTER TABLE books ADD COLUMN publisher TEXT`);
   await db.none(`ALTER TABLE books ADD COLUMN number_pages INTEGER NOT NULL`);
 
+  // Creazione del ruolo Martin e assegnazione della password
+  await db.none(`
+    CREATE ROLE martin LOGIN PASSWORD 'password';
+  `);
+
+  // Concessione dei privilegi di SELECT e UPDATE a Martin
+  await db.none(`
+    GRANT SELECT, UPDATE ON TABLE books TO martin;
+  `);
+
   // "A Journey to the Center" di Jules Verne
   await db.none(`
     INSERT INTO books (
