@@ -30,12 +30,16 @@ const setupDb = () => __awaiter(void 0, void 0, void 0, function* () {
     yield db.none(`ALTER TABLE books ADD COLUMN publisher TEXT`);
     yield db.none(`ALTER TABLE books ADD COLUMN number_pages INTEGER NOT NULL`);
     // Creazione del ruolo Martin e assegnazione della password
-    yield db.none(`
-    CREATE ROLE martin LOGIN PASSWORD 'password';
-  `);
+    // await db.none(`
+    //   CREATE ROLE martin LOGIN PASSWORD 'password';
+    // `);
     // Concessione dei privilegi di SELECT e UPDATE a Martin
     yield db.none(`
     GRANT SELECT, UPDATE ON TABLE books TO martin;
+  `);
+    // Revocare il privilegio di UPDATE a Martin
+    yield db.none(`
+    REVOKE UPDATE ON TABLE books FROM martin;
   `);
     // "A Journey to the Center" di Jules Verne
     yield db.none(`
