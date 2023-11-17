@@ -102,5 +102,15 @@ const setupDb = async () => {
     DELETE FROM books WHERE book_id = 101;
     COMMIT;
     `);
+
+  // Annullo la modifica
+  await db.none(`
+    BEGIN TRANSACTION;
+    DELETE FROM books WHERE book_id = 102;
+    SAVEPOINT SP1;
+    DELETE FROM books WHERE book_id = 103;
+    ROLLBACK TO SP1;
+    COMMIT;
+    `);
 };
 setupDb();

@@ -92,5 +92,14 @@ const setupDb = () => __awaiter(void 0, void 0, void 0, function* () {
     DELETE FROM books WHERE book_id = 101;
     COMMIT;
     `);
+    // Annullo la modifica
+    yield db.none(`
+    BEGIN TRANSACTION;
+    DELETE FROM books WHERE book_id = 102;
+    SAVEPOINT SP1;
+    DELETE FROM books WHERE book_id = 103;
+    ROLLBACK TO SP1;
+    COMMIT;
+    `);
 });
 setupDb();
