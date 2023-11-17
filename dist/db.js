@@ -86,5 +86,11 @@ const setupDb = () => __awaiter(void 0, void 0, void 0, function* () {
     WHERE
       title = 'War and Peace'
   `, [newPrice, copiesSold]);
+    // Rimozione libro con BookId = 101
+    yield db.none(`
+    BEGIN TRANSACTION;
+    DELETE FROM books WHERE book_id = 101;
+    COMMIT;
+    `);
 });
 setupDb();

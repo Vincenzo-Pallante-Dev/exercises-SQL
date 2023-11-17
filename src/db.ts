@@ -95,5 +95,12 @@ const setupDb = async () => {
   `,
     [newPrice, copiesSold]
   );
+
+  // Rimozione libro con BookId = 101
+  await db.none(`
+    BEGIN TRANSACTION;
+    DELETE FROM books WHERE book_id = 101;
+    COMMIT;
+    `);
 };
 setupDb();
