@@ -61,5 +61,18 @@ const setupDb = () => __awaiter(void 0, void 0, void 0, function* () {
       'The Galactic Odyssey', 'Orion Starfield', 'Science Fiction', 2005, 1234567890126, 1999, 4.9, 15, 'Nebula Press', 450
     )
   `);
+    // Nuovo prezzo dopo la riduzione
+    const newPrice = 1299;
+    // Numero di copie vendute
+    const copiesSold = 1;
+    // Aggiorno il prezzo e il numero di scorte per "War and Peace"
+    yield db.none(`
+    UPDATE books
+    SET
+      price = $1,
+      stock_count = stock_count - $2
+    WHERE
+      title = 'War and Peace'
+  `, [newPrice, copiesSold]);
 });
 setupDb();
